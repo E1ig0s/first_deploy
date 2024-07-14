@@ -18,9 +18,8 @@ services:
 
     database:
         image: mysql:latest
-        environment:
-            MYSQL_DATABASE: ${MYSQL_DATABASE}
-            MYSQL_ROOT_PASSWORD: ${MYSQL_ROOT_PASSWORD}
+        env_file:
+            - ./.env.docker
         volumes:
             - mysql-data:/var/lib/mysql
         ports:
