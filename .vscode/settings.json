@@ -1,0 +1,15 @@
+{
+    "editor.formatOnSave": true,
+    "editor.defaultFormatter": "esbenp.prettier-vscode",
+    "cSpell.words": [
+        "EMAILADDRESS",
+        "EMAILPASSWORD",
+        "nestjs",
+        "typeorm",
+        "uuidv"
+    ],
+    "compile-hero.disable-compile-files-on-did-save-code": false
+    // "files.exclude": {
+    //     "**/dist": true
+    // }
+}

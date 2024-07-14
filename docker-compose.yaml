@@ -1,0 +1,49 @@
+services:
+    backend:
+        build:
+            context: .
+            dockerfile: Dockerfile
+        volumes:
+            - ./src:/server/src
+        ports:
+            - 3000:3000
+        env_file:
+            - ./.env.docker
+        depends_on:
+            - database
+            - redis
+        mem_limit: 3g
+        networks:
+            - network
+
+    database:
+        image: mysql:latest
+        environment:
+            MYSQL_DATABASE: ${MYSQL_DATABASE}
+            MYSQL_ROOT_PASSWORD: ${MYSQL_ROOT_PASSWORD}
+        volumes:
+            - mysql-data:/var/lib/mysql
+        ports:
+            - 3306:3306
+        mem_limit: 3g
+        networks:
+            - network
+
+    redis:
+        image: redis:latest
+        volumes:
+            - redis-data:/data
+            - ./redis.conf:/usr/local/etc/redis/redis.conf
+        ports:
+            - 6379:6379
+        command: ['redis-server', '/usr/local/etc/redis/redis.conf']
+        networks:
+            - network
+
+volumes:
+    mysql-data:
+    redis-data:
+
+networks:
+    network:
+        driver: bridge
